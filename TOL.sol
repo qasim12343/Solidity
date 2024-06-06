@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.24;
+pragma solidity ^0.8.18;
 
 contract TOL {
     
@@ -11,13 +11,13 @@ contract TOL {
     }
     uint16 pidSize;
     
-    constructor() {
-        pidSize = 0;
-    }
     struct Time{
         uint16 hour;
         uint16 minute;
         uint16 second;
+    }
+    constructor() {
+        pidSize = 0;
     }
     mapping (uint16 => Person) persons;
     function getTime()public view returns (Time memory){
@@ -49,9 +49,9 @@ contract TOL {
     function thoughtOfThem(uint16 pid) public{
         uint16 fid = persons[pid].freindPid;
         require(fid >0, "You are single my friend");
-        //Time memory t = getTime();
+        Time memory t = getTime();
 
-        //require(t.hour == 11 && t.minute == 11,"Time is not 11:11");
+        require(t.hour == 11 && t.minute == 11,"Time is not 11:11");
         persons[pid].tought = true;
         if(persons[fid].tought == true){
             persons[pid].tokens += 100;
